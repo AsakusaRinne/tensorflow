@@ -3,6 +3,7 @@ VERS_1.0 {
   global:
     *TF_*;
     *TFE_*;
+    *TFC_*;
 
   # Hide everything else.
   local:
