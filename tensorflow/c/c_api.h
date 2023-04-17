@@ -24,6 +24,7 @@ limitations under the License.
 #include "tensorflow/c/tf_status.h"
 #include "tensorflow/c/tf_tensor.h"
 #include "tensorflow/c/tf_tstring.h"
+#include "tensorflow/core/framework/full_type.pb.h"
 
 // --------------------------------------------------------------------------
 // C API for TensorFlow.
@@ -1619,6 +1620,44 @@ TF_CAPI_EXPORT extern void TF_RegisterLogListener(
 // On failure, place an error status in status.
 TF_CAPI_EXPORT extern void TF_RegisterFilesystemPlugin(
     const char* plugin_filename, TF_Status* status);
+
+TF_CAPI_EXPORT extern void TFC_AddControlInput(TF_Graph* graph, TF_Operation* op, TF_Operation* input);
+
+TF_CAPI_EXPORT extern void TFC_SetAttr(TF_Graph* graph, TF_Operation* op,
+                                       const char* attr_name,
+                                       TF_Buffer* attr_value_proto,
+                                       TF_Status* status);
+
+TF_CAPI_EXPORT extern void TFC_ClearAttr(TF_Graph* graph, TF_Operation* op,
+                                         const char* attr_name,
+                                         TF_Status* status);
+
+TF_CAPI_EXPORT extern void TFC_SetFullType(TF_Graph* graph, TF_Operation* op,
+                                           const tensorflow::FullTypeDef& full_type);
+
+TF_CAPI_EXPORT extern void TFC_SetRequestedDevice(TF_Graph* graph,
+                                                  TF_Operation* op,
+                                                  const char* device);
+
+TF_CAPI_EXPORT extern void TFC_UpdateEdge(TF_Graph* graph, TF_Output new_src,
+                                          TF_Input dst, TF_Status* status);
+
+TF_CAPI_EXPORT extern void TFC_RemoveAllControlInputs(TF_Graph* graph, TF_Operation* op);
+
+TF_CAPI_EXPORT extern void TFC_SetRequireShapeInferenceFns(TF_Graph* graph, bool require);
+
+TF_CAPI_EXPORT extern void TFC_ExtendSession(TF_Session* session, TF_Status* status);
+
+TF_CAPI_EXPORT extern const char* TFC_GetHandleShapeAndType(TF_Graph* graph, TF_Output output);
+
+TF_CAPI_EXPORT extern void TFC_SetHandleShapeAndType(TF_Graph* graph,
+                                                     TF_Output output,
+                                                     const void* proto,
+                                                     size_t proto_len,
+                                                     TF_Status* status);
+
+TF_CAPI_EXPORT extern void TFC_AddWhileInputHack(TF_Graph* graph, TF_Output new_src, TF_Operation* dst,
+                       TF_Status* status);
 
 #ifdef __cplusplus
 } /* end extern "C" */
