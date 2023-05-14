@@ -276,7 +276,7 @@ def main():
     # Each symbols returned by undname matches the same position in candidates.
     # We compare on undname but use the decorated name from candidates.
     dupes = 0
-    proc = subprocess.Popen([UNDNAME, tmpfile.name], stdout=subprocess.PIPE)
+    proc = subprocess.Popen([UNDNAME, tmpfile.name], stdout=subprocess.PIPE, shell=True)
     for idx, line in enumerate(io.TextIOWrapper(proc.stdout, encoding="utf-8")):
       decorated = candidates[idx]
       if decorated in taken:
