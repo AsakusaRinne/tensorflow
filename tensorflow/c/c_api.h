@@ -1648,7 +1648,7 @@ TF_CAPI_EXPORT extern void TFC_SetRequireShapeInferenceFns(TF_Graph* graph, bool
 
 TF_CAPI_EXPORT extern void TFC_ExtendSession(TF_Session* session, TF_Status* status);
 
-TF_CAPI_EXPORT extern const char* TFC_GetHandleShapeAndType(TF_Graph* graph, TF_Output output);
+TF_CAPI_EXPORT extern TF_Buffer* TFC_GetHandleShapeAndType(TF_Graph* graph, TF_Output output);
 
 TF_CAPI_EXPORT extern void TFC_SetHandleShapeAndType(TF_Graph* graph,
                                                      TF_Output output,
